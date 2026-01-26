@@ -32,6 +32,20 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+
+            <CollectionView ItemsSource="{Binding Books}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="10">
+                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding Author}" FontSize="14"/>
+                            <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+            
         </VerticalStackLayout>
     </ScrollView>
 

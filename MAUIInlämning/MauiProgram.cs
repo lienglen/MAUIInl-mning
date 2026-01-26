@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MAUIInlämning.Services;
+using MAUIInlämning.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace MAUIInlämning
 {
@@ -15,8 +17,12 @@ namespace MAUIInlämning
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<APIBookService>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

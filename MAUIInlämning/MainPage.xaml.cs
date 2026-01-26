@@ -1,12 +1,23 @@
-﻿namespace MAUIInlämning
+﻿using MAUIInlämning.ViewModels;
+
+namespace MAUIInlämning
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
+        private readonly MainViewModel _mainViewModel;
 
-        public MainPage()
+        public MainPage(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            _mainViewModel = mainViewModel;
+            BindingContext = mainViewModel;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await _mainViewModel.GetBooksAsync();
         }
 
         private void OnCounterClicked(object? sender, EventArgs e)
