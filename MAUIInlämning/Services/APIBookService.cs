@@ -29,7 +29,31 @@ namespace MAUIInlämning.Services
 
             if (response.IsSuccessStatusCode)
             {
-                books = await response.Content.ReadFromJsonAsync<GoogleBooksResponse.Rootobject>();
+                //Läser in JSON-svaret och deserialiserar det till Rootobject
+                var rootobject = await response.Content.ReadFromJsonAsync<GoogleBooksResponse.Rootobject>();
+
+                //Rensar listan innan nya böcker läggs till
+                books.Clear();
+
+                if (rootobject != null && rootobject.items != null)
+                {
+                    foreach (var item in rootobject.items)
+                    {
+                        var volumeInfo = item.volumeInfo;
+
+                        //Skapar en ny Book-instans och mappar data från API:et
+                        var book = new Book
+                        {
+                            Id = item.id.GetHashCode(), // Genererar ett ID baserat på Google Books ID
+                            Title = item.volumeInfo.title,
+                            Author = item.volumeInfo.authors?[0] ?? "Unknown",
+                            Description = item.volumeInfo.description ?? "No description available",
+                            ImageUrl = item.volumeInfo.imageLinks?.thumbnail ?? "",
+                            
+                        };
+                        books.Add(book);
+                    }
+                }
             }
             return books;
         }
