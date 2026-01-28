@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace MAUIInlämning.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public partial class BaseViewModel : ObservableObject //Impelementerar denna funktion från NugetPackage CommunityToolkit.Mvvm
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        
 
-        public void OnPropertyChanged([CallerMemberName]string propertyName=null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //Använder dataanotation för att skapa en property med OnPropertyChanged automatiskt
+        [ObservableProperty]
+        private string? title;
+
+
+       
     }
 }

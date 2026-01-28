@@ -1,4 +1,6 @@
-﻿using MAUIInlämning.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using MAUIInlämning.Models;
 using MAUIInlämning.Services;
 using MAUIInlämning.Views;
 using System;
@@ -10,12 +12,28 @@ using System.Threading.Tasks;
 
 namespace MAUIInlämning.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public partial class MainViewModel : BaseViewModel
     {
         private readonly APIBookService apiBookService;
 
-        //Lista med böcker
-        public ObservableCollection<Book> Books { get; } = new ObservableCollection<Book>();
+        //Lista med böcker som kan observeras för ändringar
+        [ObservableProperty]
+        ObservableCollection<Book> books = new ObservableCollection<Book>();
+
+        [ObservableProperty]
+        private string searchText;
+
+        [RelayCommand]
+        public async Task Search()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                return;
+            }
+
+            await GetBooksAsync(SearchText);
+        }
+
 
         public MainViewModel(APIBookService apiBookService)
         {
@@ -25,12 +43,13 @@ namespace MAUIInlämning.ViewModels
 
         private async void InitializeAsync()
         {
-            await GetBooksAsync();
+            await GetBooksAsync(SearchText);
         }
 
-        public async Task GetBooksAsync()
+        
+        public async Task GetBooksAsync(string query)
         {
-            var booksFromApi = await apiBookService.GetBooksAsync();
+            var booksFromApi = await apiBookService.GetBooksAsync(query);
 
             Books.Clear();
             foreach (var book in booksFromApi)
