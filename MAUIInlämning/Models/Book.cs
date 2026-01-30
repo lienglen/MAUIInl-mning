@@ -14,6 +14,6 @@ namespace MAUIInlämning.Models
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string Genre { get; set; }
-        public int YearPublished { get; set; }
+        public string YearPublished { get; set; }
     }
 }

@@ -44,21 +44,27 @@ namespace MAUIInlämning.Services
                             var volumeInfo = item.volumeInfo;
 
                         //Skapar en ny Book-instans och mappar data från API:et. Hanterr eventuella null-värden.
-                        var book = new Book
-                                {
-                                    Id = item.id?.GetHashCode() ?? 0, // Genererar ett ID baserat på Google Books ID
-                                    
-                                    Title = item.volumeInfo.title ?? "No title found",
+                            var book = new Book
+                            {
+                            Id = item.id?.GetHashCode() ?? 0, // Genererar ett ID baserat på Google Books ID
 
-                                    Author = (volumeInfo.authors != null && volumeInfo.authors.Length > 0)
+                            Title = item.volumeInfo.title ?? "No title found",
+
+                            Author = (volumeInfo.authors != null && volumeInfo.authors.Length > 0)
                                     ? volumeInfo.authors[0]
-                                    :"Unknown",
+                                    : "Unknown",
 
-                                    Description = volumeInfo?.description ?? "No description available",
-                                    ImageUrl = volumeInfo.imageLinks?.thumbnail ?? "",
+                            Description = volumeInfo?.description ?? "No description available",
+                            ImageUrl = volumeInfo?.imageLinks?.thumbnail ?? "",
+                            Genre = (volumeInfo?.categories != null && volumeInfo.categories.Length >0) ? volumeInfo.categories[0]
+                            :"Unknown",
+                            YearPublished = (volumeInfo?.publishedDate != null && volumeInfo.publishedDate.ToString().Length >= 4)
+                                            ? volumeInfo.publishedDate.ToString().Substring(0, 4)
+                                            : "Unknown"
 
-                                };
-                                books.Add(book);
+                            };
+
+                            books.Add(book);
                         }
                     }
                 }

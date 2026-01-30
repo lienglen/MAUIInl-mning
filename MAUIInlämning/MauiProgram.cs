@@ -1,5 +1,6 @@
 ﻿using MAUIInlämning.Services;
 using MAUIInlämning.ViewModels;
+using MAUIInlämning.Views;
 using Microsoft.Extensions.Logging;
 
 namespace MAUIInlämning
@@ -17,9 +18,11 @@ namespace MAUIInlämning
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<MainViewModel>();
-            builder.Services.AddTransient<APIBookService>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<DetailsPage>();
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddTransient<DetailsViewModel>();
+            builder.Services.AddSingleton<APIBookService>();
 
 #if DEBUG
             builder.Logging.AddDebug();
