@@ -11,6 +11,7 @@ namespace MAUIInlämning.ViewModels
     [QueryProperty("SelectedBook", "SelectedBook")] //Använder detta för att kunna skicka data mellan sidor
     public partial class DetailsViewModel : BaseViewModel
     {
+        //Objektet för den valda boken
         [ObservableProperty]
         Book selectedBook;
     }

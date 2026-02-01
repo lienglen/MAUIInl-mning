@@ -58,26 +58,6 @@ namespace MAUIInlämning.ViewModels
             }
         }
 
-        //private Book selectedBook;
-        //public Book SelectedBook
-        //{
-        //    get => selectedBook;
-        //    set
-        //    {
-        //        // Undvik onödig navigering om samma bok väljs igen
-        //        if (value == selectedBook) return;
-
-        //        selectedBook = value;
-        //        OnPropertyChanged();
-
-        //        if (selectedBook != null)
-        //        {
-        //            // Navigera till detaljsidan med den valda boken
-        //            HandleNavigation(selectedBook);
-        //        }
-        //    }
-        //}
-
         [RelayCommand]
         public async Task HandleNavigation(Book selectedBook) 
         {

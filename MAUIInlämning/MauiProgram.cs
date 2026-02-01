@@ -18,6 +18,7 @@ namespace MAUIInlämning
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Registrera sidor, vy-modeller och servicar för dependency injection
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<DetailsPage>();
             builder.Services.AddSingleton<MainViewModel>();

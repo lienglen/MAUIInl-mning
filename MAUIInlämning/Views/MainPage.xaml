@@ -7,10 +7,6 @@
              x:DataType="ViewModels:MainViewModel"
              Title="{Binding Title}">
              
-
-        <!--ScrollView för description-rutan?-->
-
-    <!--<ScrollView>-->
     <Grid RowDefinitions="Auto, Auto, Auto, *"
           Margin="20"
           Padding="30"
@@ -27,13 +23,13 @@
                SearchCommand="{Binding SearchCommand}"
                />
 
-            <Button Grid.Row="2"
+        <Button Grid.Row="2"
                     Text="Search"
                     Command="{Binding SearchCommand}"
                 ></Button>
 
-       
-            <CollectionView Grid.Row="3"
+
+        <CollectionView Grid.Row="3"
                             ItemsSource="{Binding Books}"
                             SelectionMode="Single"
                             SelectedItem="{Binding SelectedBook}"
@@ -51,27 +47,25 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="Models:Book">
                     <Grid Padding="5">
-                    <Border Margin="20, 15" Padding="5" StrokeShape="10" BackgroundColor="#FFFFFF">
+                        <Border Margin="20, 15" Padding="5" StrokeShape="10" BackgroundColor="#FFFFFF">
                             <Border.Shadow>
                                 <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.2" />
                             </Border.Shadow>
 
                             <VerticalStackLayout Padding="10">
-                            <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="150" HorizontalOptions="Start"/>
-                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18" TextColor="Black" />
-                            <Label Text="{Binding Author}" FontSize="14"/>
-                            <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap"/>
-                        </VerticalStackLayout>
-                           
+                                <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="150" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18" TextColor="Black" />
+                                <Label Text="{Binding Author}" FontSize="14"/>
+                                <Label Text="{Binding Description}" FontSize="12" LineBreakMode="WordWrap"/>
+                            </VerticalStackLayout>
+
                         </Border>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-       
-    </Grid>
-    <!--</ScrollView>-->
 
+    </Grid>
 
 </ContentPage>
